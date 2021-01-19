@@ -1,0 +1,28 @@
+fn()
+{
+    case $@ in
+        "-l")
+            echo ~/.zfunc/[^_]*(:t)
+        ;;
+        "-a")
+            autoload -Uz ~/.zfunc/[^_]*(:t)
+            echo "functions autoloaded"
+        ;;
+        "-r")
+            unfunction ~/.zfunc/[^_]*(:t)
+            autoload -Uz ~/.zfunc/[^_]*(:t)
+            echo "functions reloaded"
+        ;;
+        "-u")
+            unfunction ~/.zfunc/[^_]*(:t)
+            echo "functions unloaded"
+        ;;
+        "")
+            echo "usage: fn [ -l | -a | -r | -u ]"
+        ;;
+        *)
+            echo "fn: unknown flag $@"
+            echo "usage: fn [ -l | -a | -r | -u ]"
+        ;;
+    esac
+}
