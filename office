@@ -1,0 +1,4 @@
+#!/bin/bash
+
+open -a "Microsoft Teams"
+open -a "Microsoft Outlook"

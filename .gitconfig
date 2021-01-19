@@ -1,0 +1,6 @@
+[user]
+  email = simon@erp-architect.com
+  name = ERP-ARCHITECT
+
+[credential "https://github.com/erp-architect"]
+	username = ERP-ARCHITECT

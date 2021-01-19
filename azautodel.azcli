@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for rg in $(az group list --tag delete --query '[].name' | jq -r '.[]'); do echo "Delete Resource Group: ${rg}"; az group delete -n ${rg}; done
+
+
+for rg in $(az group list --query '[].name' | jq -r '.[]'); do
+    echo "$rg"
+    echo "allo\n"
+done
+
+for rg in $(az group list --query '[].name' -otsv); do
+    echo ">$rg"
+done
