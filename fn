@@ -4,6 +4,9 @@ fn()
         "-l")
             echo ~/.zfunc/[^_]*(:t)
         ;;
+        "-d")
+            cd ~/.zfunc
+        ;;
         "-a")
             autoload -Uz ~/.zfunc/[^_]*(:t)
             echo "functions autoloaded"
@@ -18,11 +21,11 @@ fn()
             echo "functions unloaded"
         ;;
         "")
-            echo "usage: fn [ -l | -a | -r | -u ]"
+            echo "usage: fn [ -l | -d | -a | -r | -u ]"
         ;;
         *)
             echo "fn: unknown flag $@"
-            echo "usage: fn [ -l | -a | -r | -u ]"
+            echo "usage: fn [ -l | -d | -a | -r | -u ]"
         ;;
     esac
 }
