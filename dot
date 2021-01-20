@@ -1,0 +1,29 @@
+dot()
+{
+    case $1 in
+    "-c")
+        mkdir -p ~/erp/dotfiles/.config/gh && cp ~/.config/gh/config.yml ~/erp/dotfiles/.config/gh/config.yml
+        mkdir -p ~/erp/dotfiles/.azure && cp ~/.azure/alias ~/erp/dotfiles/.azure/alias
+    ;;
+    "-gc")
+        message=$2
+        if [[ -n $message ]]; then
+            git add ~/erp/dotfiles/.
+            git commit -m $message
+            git push
+        else
+            echo "missing commit message"
+        fi
+       
+    ;;
+    "-d")
+        cd ~/erp/dotfiles
+    ;;
+    "-l")
+        find . -type f -not -path "./.git*"
+    ;;
+    *)
+        echo "Usage: df [ -d ]"
+    ;;
+    esac
+}
