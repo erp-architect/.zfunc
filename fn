@@ -1,6 +1,6 @@
 fn()
 {
-    case $@ in
+    case $1 in
         "-l")
             echo ~/.zfunc/[^_]*(:t)
         ;;
@@ -19,7 +19,11 @@ fn()
         "-u")
             unfunction ~/.zfunc/[^_]*(:t)
             echo "functions unloaded"
-        ;;
+            ;;
+        "-e")
+            echo $2
+            command code ~/.zfunc/$2
+            ;;
         "")
             echo "usage: fn [ -l | -d | -a | -r | -u ]"
         ;;

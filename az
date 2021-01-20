@@ -1,0 +1,31 @@
+az()
+{
+    case $@ in
+        "man")
+            command open "https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest"
+        ;;
+        "portal")
+            command open "https://portal.azure.com"
+        ;;
+        "cleanup")
+            az glsc
+
+            echo ""
+            echo -n "Continue deleting listed resource groups (Y/N)? "
+            read answer
+
+            if [ "$answer" != "${answer#[Yy]}" ] ;then
+                for rg in $(az group list --query "[?tags.Autocleanup == 'yes' && tags.Owner == 'simon.simonsen@columbusglobal.com'].name" | jq -r '.[]'); do
+                    echo "$rg: "
+                    az group delete --yes -n ${rg};
+                done
+            else
+                echo aborted
+            fi
+        ;;
+        *)
+            command az $@
+        ;;
+    esac
+    
+}
