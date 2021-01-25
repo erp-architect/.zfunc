@@ -4,9 +4,30 @@ dot()
     "-l")
         find . -type f -not -path "./.git*"
     ;;
-    "-c")
-        mkdir -p ~/erp/dotfiles/.config/gh && cp ~/.config/gh/config.yml ~/erp/dotfiles/.config/gh/config.yml
-        mkdir -p ~/erp/dotfiles/.azure && cp ~/.azure/alias ~/erp/dotfiles/.azure/alias
+    "--c2d")
+        echo ""
+        echo -n "Continue overwrite dotfiles from config (Y/N)? "
+        read answer
+
+        if [ "$answer" != "${answer#[Yy]}" ] ;then
+            mkdir -p ~/erp/dotfiles/.config/gh && cp ~/.config/gh/config.yml ~/erp/dotfiles/.config/gh/config.yml
+            mkdir -p ~/erp/dotfiles/.azure && cp ~/.azure/alias ~/erp/dotfiles/.azure/alias
+        else
+            echo aborted
+        fi
+    ;;
+    "--d2c")
+        echo ""
+        echo -n "Continue overwrite config from dotfiles (Y/N)? "
+        read answer
+
+        if [ "$answer" != "${answer#[Yy]}" ] ;then
+            cp ~/erp/dotfiles/.config/gh/config.yml ~/.config/gh/config.yml
+            cp ~/erp/dotfiles/.azure/alias ~/.azure/alias
+        else
+            echo aborted
+        fi
+
     ;;
     "-gc")
         message=$2
@@ -23,7 +44,7 @@ dot()
         cd ~/erp/dotfiles
     ;;
     *)
-        echo "Usage: df [ -l | -c | -gc | -d ]"
+        echo "Usage: df [ -l | --c2d | --d2c | -c | -gc | -d ]"
     ;;
     esac
 }
