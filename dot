@@ -1,6 +1,9 @@
 dot()
 {
     case $1 in
+    "-l")
+        find . -type f -not -path "./.git*"
+    ;;
     "-c")
         mkdir -p ~/erp/dotfiles/.config/gh && cp ~/.config/gh/config.yml ~/erp/dotfiles/.config/gh/config.yml
         mkdir -p ~/erp/dotfiles/.azure && cp ~/.azure/alias ~/erp/dotfiles/.azure/alias
@@ -19,11 +22,8 @@ dot()
     "-d")
         cd ~/erp/dotfiles
     ;;
-    "-l")
-        find . -type f -not -path "./.git*"
-    ;;
     *)
-        echo "Usage: df [ -d ]"
+        echo "Usage: df [ -l | -c | -gc | -d ]"
     ;;
     esac
 }
