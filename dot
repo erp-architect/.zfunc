@@ -12,6 +12,7 @@ dot()
         if [ "$answer" != "${answer#[Yy]}" ] ;then
             mkdir -p ~/erp/dotfiles/.config/gh && cp ~/.config/gh/config.yml ~/erp/dotfiles/.config/gh/config.yml
             mkdir -p ~/erp/dotfiles/.azure && cp ~/.azure/alias ~/erp/dotfiles/.azure/alias
+                                              cp ~/.gitconfig ~/erp/dotfiles/dot-gitconfig
         else
             echo aborted
         fi
@@ -24,6 +25,7 @@ dot()
         if [ "$answer" != "${answer#[Yy]}" ] ;then
             cp ~/erp/dotfiles/.config/gh/config.yml ~/.config/gh/config.yml
             cp ~/erp/dotfiles/.azure/alias ~/.azure/alias
+            cp ~/erp/dotfiles/dot-gitconfig ~/.gitconfig
         else
             echo aborted
         fi
@@ -44,7 +46,7 @@ dot()
         cd ~/erp/dotfiles
     ;;
     *)
-        echo "Usage: df [ -l | --c2d | --d2c | -c | -gc | -d ]"
+        echo "Usage: dot [ -l | --c2d | --d2c | -c | -gc | -d ]"
     ;;
     esac
 }
