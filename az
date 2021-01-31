@@ -10,6 +10,17 @@ az()
         "portal")
             command open "https://portal.azure.com"
         ;;
+        "gc")
+            if [[ -n $2 ]]; then
+                rg=$2
+                az group create \
+                    --location westeurope \
+                    --name $rg \
+                    --tags Owner=simon.simonsen@columbusglobal.com Autocleanup=later
+            else
+                echo "Usage: az gc <resource-group-name>"
+            fi
+        ;;
         "stg")
             if [[ -n $2 ]] && [[ -n $3 ]]; then
                 stg_ac=$2
