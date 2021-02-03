@@ -23,7 +23,7 @@ az()
         ;;
         "stg")
             if [[ -n $2 ]] && [[ -n $3 ]]; then
-                stg_ac=$2
+                stg_ac=ssim$2
                 rg=$3
                 stg_ac_exists=`az storage account list --resource-group $rg --query "[?starts_with(name, '$stg_ac')].{Name:name}" -otsv`
 
@@ -38,7 +38,27 @@ az()
                 fi
                 echo $stg_ac
             else
-                echo "Usage: az stg <stg_ac>"
+                echo "Usage: az stg <stg_ac> <resource-group-name>"
+            fi
+        ;;
+        "wp")
+            if [[ -n $2 ]] && [[ -n $3 ]]; then
+                plan_name=ssim$2
+                rg=$3
+                plan_exists=`az appservice plan list --resource-group $rg --query "[?starts_with(name, '$plan_name')].{Name:name}" -otsv`
+
+                if [[ -n $plan_exists ]]; then
+                    plan_name=$plan_exists
+                else
+                    rnd24=0
+                    if [ $rnd24 = 0 ]; then
+                        rnd24=`head -n 10 /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 24 | head -n 1`
+                    fi
+                    plan_name="${plan_name}${rnd24:0:24-${#plan_name}}"
+                fi
+                echo $plan_name
+            else
+                echo "Usage: az wp <plan_name> <resource-group-name>"
             fi
         ;;
         "cleanup")
