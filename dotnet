@@ -1,0 +1,12 @@
+dotnet()
+{
+    case $1 in
+        "man")
+            command open "https://docs.microsoft.com/en-us/dotnet/core/tools/"
+        ;;
+       *)
+            command dotnet $@
+        ;;
+    esac
+    
+}
