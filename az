@@ -21,24 +21,24 @@ az()
                 echo "Usage: az gc <resource-group-name>"
             fi
         ;;
-        "stg")
+        "sta")
             if [[ -n $2 ]] && [[ -n $3 ]]; then
-                stg_ac=ssim$2
+                sta_name=ssim$2
                 rg=$3
-                stg_ac_exists=`az storage account list --resource-group $rg --query "[?starts_with(name, '$stg_ac')].{Name:name}" -otsv`
+                sta_name_exists=`az storage account list --resource-group $rg --query "[?starts_with(name, '$sta_name')].{Name:name}" -otsv`
 
-                if [[ -n $stg_ac_exists ]]; then
-                    stg_ac=$stg_ac_exists
+                if [[ -n $sta_name_exists ]]; then
+                    sta_name=$sta_name_exists
                 else
                     rnd24=0
                     if [ $rnd24 = 0 ]; then
                         rnd24=`head -n 10 /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 24 | head -n 1`
                     fi
-                    stg_ac="${stg_ac}${rnd24:0:24-${#stg_ac}}"
+                    sta_name="${sta_name}${rnd24:0:24-${#sta_name}}"
                 fi
-                echo $stg_ac
+                echo $sta_name
             else
-                echo "Usage: az stg <stg_ac> <resource-group-name>"
+                echo "Usage: az sta <sta_name> <resource-group-name>"
             fi
         ;;
         "wp")
