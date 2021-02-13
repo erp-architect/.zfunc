@@ -41,24 +41,24 @@ az()
                 echo "Usage: az sta <sta_name> <resource-group-name>"
             fi
         ;;
-        "wp")
+        "app")
             if [[ -n $2 ]] && [[ -n $3 ]]; then
-                plan_name=ssim$2
+                app_name=ssim$2
                 rg=$3
-                plan_exists=`az appservice plan list --resource-group $rg --query "[?starts_with(name, '$plan_name')].{Name:name}" -otsv`
+                app_name_exists=`az webapp list --resource-group $rg --query "[?starts_with(name, '$app_name')].{Name:name}" -otsv`
 
-                if [[ -n $plan_exists ]]; then
-                    plan_name=$plan_exists
+                if [[ -n $app_name_exists ]]; then
+                    app_name=$app_name_exists
                 else
                     rnd24=0
                     if [ $rnd24 = 0 ]; then
                         rnd24=`head -n 10 /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 24 | head -n 1`
                     fi
-                    plan_name="${plan_name}${rnd24:0:24-${#plan_name}}"
+                    app_name="${app_name}${rnd24:0:24-${#app_name}}"
                 fi
-                echo $plan_name
+                echo $app_name
             else
-                echo "Usage: az wp <plan_name> <resource-group-name>"
+                echo "Usage: az app <app_name> <resource-group-name>"
             fi
         ;;
         "cleanup")
