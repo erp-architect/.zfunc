@@ -61,6 +61,26 @@ az()
                 echo "Usage: az app <app_name> <resource-group-name>"
             fi
         ;;
+        "fnapp")
+            if [[ -n $2 ]] && [[ -n $3 ]]; then
+                fnapp_name=ssim$2
+                rg=$3
+                fnapp_name_exists=`az functionapp list --resource-group $rg --query "[?starts_with(name, '$fnapp_name')].{Name:name}" -otsv`
+
+                if [[ -n $fnapp_name_exists ]]; then
+                    fnapp_name=$fnapp_name_exists
+                else
+                    rnd24=0
+                    if [ $rnd24 = 0 ]; then
+                        rnd24=`head -n 10 /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 24 | head -n 1`
+                    fi
+                    fnapp_name="${fnapp_name}${rnd24:0:24-${#fnapp_name}}"
+                fi
+                echo $fnapp_name
+            else
+                echo "Usage: az fnapp <function-app_name> <resource-group-name>"
+            fi
+        ;;
         "cleanup")
             az glsc
 
