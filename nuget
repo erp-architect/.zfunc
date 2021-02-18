@@ -1,0 +1,15 @@
+nuget()
+{
+    case $1 in
+        "man")
+            command open "https://www.nuget.org/"
+        ;;
+        "pkg")
+            command open "https://www.nuget.org/packages"
+        ;;
+       *)
+            command nuget $@
+        ;;
+    esac
+    
+}
