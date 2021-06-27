@@ -25,11 +25,11 @@ fn()
             command code ~/.zfunc/$2
             ;;
         "")
-            echo "usage: fn [ -l | -d | -a | -r | -u ]"
+            echo "usage: fn [ -l | -d | -a | -r | -u | -e ]"
         ;;
         *)
             echo "fn: unknown flag $@"
-            echo "usage: fn [ -l | -d | -a | -r | -u ]"
+            echo "usage: fn [ -l | -d | -a | -r | -u | -e ]"
         ;;
     esac
 }
