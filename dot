@@ -10,6 +10,7 @@ dot()
         read answer
 
         if [ "$answer" != "${answer#[Yy]}" ] ;then
+            mkdir -p ~/erp/dotfiles/.oh-my-zsh/custom && cp ~/.oh-my-zsh/custom/aliases.zsh ~/erp/dotfiles/.oh-my-zsh/custom/aliases.zsh
             mkdir -p ~/erp/dotfiles/.config/gh && cp ~/.config/gh/config.yml ~/erp/dotfiles/.config/gh/config.yml
             mkdir -p ~/erp/dotfiles/.azure && cp ~/.azure/alias ~/erp/dotfiles/.azure/alias
                                               cp ~/.gitconfig ~/erp/dotfiles/dot-gitconfig
@@ -23,6 +24,7 @@ dot()
         read answer
 
         if [ "$answer" != "${answer#[Yy]}" ] ;then
+            cp ~/erp/dotfiles/.oh-my-zsh/custom/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
             cp ~/erp/dotfiles/.config/gh/config.yml ~/.config/gh/config.yml
             cp ~/erp/dotfiles/.azure/alias ~/.azure/alias
             cp ~/erp/dotfiles/dot-gitconfig ~/.gitconfig
